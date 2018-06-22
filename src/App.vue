@@ -1,20 +1,45 @@
 <template>
-<div>
-  <prograss></prograss> 
-  <div class="row">
-  </div>
-   
-</div>
+<div class="container">
+  <app-new-quote @quoteAdded="newQuote"></app-new-quote>
+  <app-quote-grid :quotes="quotes" @quoteDeleted='deleteQuote'></app-quote-grid>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+
+      <div class="alert alert-info">
+        Info:Click On Quote To Delete It !
+      </div>
+      </div>
+    </div>
+    </div>
 
 </template>
 
 <script>
-import prograss from './components/Prograssbar.vue';
+import QuoteGrid from './components/QuoteGrid.vue';
+import NewQuote from './components/NewQuote.vue';
+
 
 export default {
-
+data(){
+  return {
+    quotes:[
+            'Just A Quote See Something !',
+      ],
+    maxQuote:10
+  }
+},
+methods:{
+  newQuote(quote){
+    this.quotes.push(quote);
+  },
+  deleteQuote(index){
+    
+    this.quotes.splice(index,1);
+  }
+},
 components:{
-  Prograss:prograss,
+  appQuoteGrid:QuoteGrid,
+  appNewQuote:NewQuote,
 }
 }
 </script>
